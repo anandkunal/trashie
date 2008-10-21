@@ -1,1 +1,12 @@
-Trashie is a utility that lets you monitor your OS X trash from the menu bar. It is written in PyObjC. Icons are snagged from the Tango Project.
+INFO:
+Trashie is a utility that lets you monitor your OS X trash from the menu bar. 
+It is written in PyObjC. 
+Icons are snagged from the Tango Project.
+
+INSTALL:
+To get the party started, run `python setup.py py2app`. 
+Alternatively, you can run `bash setup.sh`.
+
+TODO:
+1. Flicker the menu after the trash is emptied
+2. Growl support would be nice and zesty
