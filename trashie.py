@@ -1,3 +1,5 @@
+# If you have growlnotify in your path - this is going to be zesty
+
 import commands
 import objc
 from Foundation import *
@@ -13,18 +15,29 @@ class Trashie(NSObject):
   images = {}
   statusbar = None
   count = 0
+  current_count = 0
   poll_seconds = 3
 
   def update_trashie(self):
-    # Update the count
-    count = commands.getstatusoutput('find ~/.Trash/ | wc -l')
+    self.current_count = self.count
+      
+    # Update the count (ignore .DS_Store files - they can be pesky)
+    count = commands.getstatusoutput('find ~/.Trash/ -not \( -name "*.DS_Store" \) | wc -l')
     if count[0] == 0:
+      # The ~/.Trash/ directory appears in the find - must remove it
       self.count = int(count[1].strip()) - 1
     
     # Update the icon
     if self.count > 0:
+      if self.current_count == 0:
+        if self.count > 1:
+          commands.getstatusoutput('growlnotify --image "trashie.icns" -m "there are %s things in the trash" "trashie"' % (self.count))
+        else:
+          commands.getstatusoutput('growlnotify --image "trashie.icns" -m "there is 1 thing in the trash" "trashie"')
       self.statusitem.setImage_(self.images['full'])
     else:
+      if self.current_count > 0:
+        commands.getstatusoutput('growlnotify --image "trashie.icns" -m "yay! the trash is empty!" "trashie"')
       self.statusitem.setImage_(self.images['empty'])
 
     # Set a tooltip & title

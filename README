@@ -8,5 +8,8 @@ To get the party started, run `python setup.py py2app`.
 Alternatively, you can run `bash setup.sh`.
 
 TODO:
-1. Flicker the menu after the trash is emptied
-2. Growl support would be nice and zesty
+1. Research other areas where there might be trash (offer users a checkbox)
+  - http://support.apple.com/kb/HT2963
+  - sudo rm -rf ~/.Trash/ 
+  - sudo rm -rf /.Trashes/ 
+  - sudo rm -rf /Volumes/<volumename>/.Trashes/
