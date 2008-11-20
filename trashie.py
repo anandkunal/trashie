@@ -1,9 +1,18 @@
 from AppKit import *
 import commands
 from Foundation import *
-import Growl
 import objc
 from PyObjCTools import AppHelper
+
+try:
+    import Growl
+except:
+    class Growl:
+        def __init__(self, *args): pass
+        class GrowlNotifier:
+            def __init__(self, *args): pass
+            def register(self, *args): pass
+            def notify(self, *args): pass
 
 status_images = {'empty':'trash-empty.png', 'full':'trash-full.png'}
 
